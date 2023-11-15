@@ -18,8 +18,8 @@ const slides = [
   },
 ];
 
-let nbr_tbl = 0;
-console.log(slides[nbr_tbl]);
+let nombre_tableau = 0;
+console.log(slides[nombre_tableau]);
 const arrow_rigth = document.querySelector(".arrow_right");
 const arrow_left = document.querySelector(".arrow_left");
 const chemin_img = "./assets/images/slideshow/";
@@ -40,50 +40,37 @@ for (let i = 0; i < slides.length; i++) {
   console.log(affbulletpoint);
 }
 
-let currentbulletpoint = document.querySelector(".div" + nbr_tbl);
+let currentbulletpoint = document.querySelector(".div" + nombre_tableau);
 currentbulletpoint.classList.add("dot_selected");
 console.log(currentbulletpoint);
 
 arrow_rigth.addEventListener("click", () => {
-  nbr_tbl = nbr_tbl + 1;
-  if (nbr_tbl >= slides.length) {
-    nbr_tbl = 0;
+  nombre_tableau = nombre_tableau + 1;
+  if (nombre_tableau >= slides.length) {
+    nombre_tableau = 0;
   }
-  slide_class.setAttribute("src", chemin_img + slides[nbr_tbl].image);
-  tagLine.innerHTML = slides[nbr_tbl].tagLine;
+  slide_class.setAttribute("src", chemin_img + slides[nombre_tableau].image);
+  tagLine.innerHTML = slides[nombre_tableau].tagLine;
   console.log("fléche de droit");
-  let currentbulletpoint = document.querySelector(".div" + nbr_tbl);
+  let currentbulletpoint = document.querySelector(".div" + nombre_tableau);
+  let remove_selected = document.querySelectorAll("div.dot");
+  remove_selected.forEach((remove_selected) => {
+    remove_selected.classList.remove("dot_selected");
+  });
+  console.log(remove_selected);
   currentbulletpoint.classList.add("dot_selected");
-  if (currentbulletpoint !== currentbulletpoint.previousElementSibling) {
-    let previousbulletpoint = currentbulletpoint.previousElementSibling;
-    if (currentbulletpoint === divbulletpoint.firstChild) {
-      const lastbulletpoint = divbulletpoint.lastChild;
-      lastbulletpoint.classList.remove("dot_selected");
-      console.log(lastbulletpoint);
-    }
-    previousbulletpoint.classList.remove("dot_selected");
-    console.log(previousbulletpoint);
-  }
 });
 
 arrow_left.addEventListener("click", () => {
-  nbr_tbl = nbr_tbl - 1;
-  if (nbr_tbl <= -1) {
-    nbr_tbl = slides.length - 1;
+  nombre_tableau = nombre_tableau - 1;
+  if (nombre_tableau <= -1) {
+    nombre_tableau = slides.length - 1;
   }
-  slide_class.setAttribute("src", chemin_img + slides[nbr_tbl].image);
-  tagLine.innerHTML = slides[nbr_tbl].tagLine;
+  slide_class.setAttribute("src", chemin_img + slides[nombre_tableau].image);
+  tagLine.innerHTML = slides[nombre_tableau].tagLine;
   console.log("fléche de gauche");
-  let currentbulletpoint = document.querySelector(".div" + nbr_tbl);
+  let remove_selected = document.querySelector(".dot_selected");
+  remove_selected.classList.remove("dot_selected");
+  let currentbulletpoint = document.querySelector(".div" + nombre_tableau);
   currentbulletpoint.classList.add("dot_selected");
-  if (currentbulletpoint !== currentbulletpoint.nextElementSibling) {
-    let previousbulletpoint = currentbulletpoint.nextElementSibling;
-    if (currentbulletpoint === divbulletpoint.lastChild) {
-      const lastbulletpoint = divbulletpoint.firstChild;
-      lastbulletpoint.classList.remove("dot_selected");
-      console.log(lastbulletpoint);
-    }
-    previousbulletpoint.classList.remove("dot_selected");
-    console.log(previousbulletpoint);
-  }
 });
